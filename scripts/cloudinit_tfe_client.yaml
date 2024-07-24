@@ -1,0 +1,14 @@
+#cloud-config
+runcmd:
+  - curl -sL https://raw.githubusercontent.com/kikitux/curl-bash/master/provision/add_github_user_public_keys.sh | GITHUB_USER=kikitux bash
+  - curl -sL https://raw.githubusercontent.com/kikitux/curl-bash/master/provision/add_github_user_public_keys.sh | GITHUB_USER=munnep bash
+  - export DEBIAN_FRONTEND=noninteractive
+  - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+  - apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  - apt-get update -y
+  - apt-get install -y terraform=${terraform_client_version}
+  - apt-get install -y awscli
+  - echo ${rsyslog_conf} | base64 --decode > /etc/rsyslog.conf
+  - systemctl restart rsyslog
+  - systemctl enable rsyslog
+packages_update: true  
