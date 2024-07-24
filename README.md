@@ -11,6 +11,7 @@ The Terraform code will do the following steps
 - Create a RDS PostgreSQL to be used by TFE
 - create roles/profiles for the TFE instance to access S3 buckets
 - Create a EC2 instance on which the TFE online installation will be performed
+- Terraform Enterprise will use Podman for managing the TFE container
 
 # Diagram
 
